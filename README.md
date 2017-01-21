@@ -2,7 +2,7 @@
 
 #### 框架
 
-SSH
+Struts2+Hibernate+Spring
 
 #### 系统架构  
 
