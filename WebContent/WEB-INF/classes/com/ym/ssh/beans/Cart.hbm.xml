@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ym.ssh.beans">
+    <class name="Cart" table="cart">
+        <id name="cartId" type="int">
+            <column name="cartId" />
+            <generator class="native" />
+        </id>
+        <property name="userId" type="int">
+            <column name="userId" />
+        </property>
+        <property name="goodsId" type="int">
+            <column name="goodsId" />
+        </property>
+        <property name="goodsNum" type="int">
+            <column name="goodsNum" />
+        </property>
+    </class>
+</hibernate-mapping>

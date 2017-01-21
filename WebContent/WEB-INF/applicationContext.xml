@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 定义数据源的信息 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost/javaee?useUnicode=true&amp;characterEncoding=UTF-8</value>
+		</property>
+		<property name="user">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>amazing1121</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>80</value>
+		</property>
+		<property name="minPoolSize">
+			<value>1</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>1</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>200</value>
+		</property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/ym/ssh/beans/User.hbm.xml</value>
+				<value>com/ym/ssh/beans/Goods.hbm.xml</value>
+				<value>com/ym/ssh/beans/Cart.hbm.xml</value>
+				<value>com/ym/ssh/beans/Order.hbm.xml</value>
+				<value>com/ym/ssh/beans/Message.hbm.xml</value>
+				<value>com/ym/ssh/beans/OrderDetails.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="UserDao" class="com.ym.ssh.daoImpl.UserDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="GoodsDao" class="com.ym.ssh.daoImpl.GoodsDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="CartDao" class="com.ym.ssh.daoImpl.CartDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="OrderDao" class="com.ym.ssh.daoImpl.OrderDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="MessageDao" class="com.ym.ssh.daoImpl.MessageDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="OrderDetailsDao" class="com.ym.ssh.daoImpl.OrderDetailsDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="userManager" class="com.ym.ssh.serviceImpl.UserManagerImpl">
+		<property name="dao">
+			<ref bean="UserDao" />
+		</property>
+	</bean>
+	
+	<bean id="goodsManager" class="com.ym.ssh.serviceImpl.GoodsManagerImpl">
+		<property name="dao">
+			<ref bean="GoodsDao" />
+		</property>
+	</bean>
+	
+	<bean id="cartManager" class="com.ym.ssh.serviceImpl.CartManagerImpl">
+		<property name="dao">
+			<ref bean="CartDao" />
+		</property>
+	</bean>
+	
+	<bean id="messageManager" class="com.ym.ssh.serviceImpl.MessageManagerImpl">
+		<property name="dao">
+			<ref bean="MessageDao" />
+		</property>
+	</bean>
+	
+	<bean id="orderManager" class="com.ym.ssh.serviceImpl.OrderManagerImpl">
+		<property name="dao">
+			<ref bean="OrderDao" />
+		</property>
+	</bean>
+	
+	<bean id="orderDetailsManager" class="com.ym.ssh.serviceImpl.OrderDetailsManagerImpl">
+		<property name="dao">
+			<ref bean="OrderDetailsDao" />
+		</property>
+	</bean>
+	
+	<bean id="userAction" class="com.ym.ssh.action.UserAction">
+		<property name="userManager">
+			<ref bean="userManager" />
+		</property>
+		<property name="cartManager">
+			<ref bean="cartManager" />
+		</property>
+	</bean>
+	
+	<bean id="messageAction" class="com.ym.ssh.action.MessageAction">
+		<property name="messageManager">
+			<ref bean="messageManager" />
+		</property>
+	</bean>
+	
+	<bean id="adminAction" class="com.ym.ssh.action.AdminAction">
+		<property name="userManager">
+			<ref bean="userManager" />
+		</property>
+		<property name="goodsManager">
+			<ref bean="goodsManager" />
+		</property>
+		<property name="orderManager">
+			<ref bean="orderManager" />
+		</property>
+	</bean>
+	
+	<bean id="goodsAction" class="com.ym.ssh.action.GoodsAction">
+		<property name="goodsManager">
+			<ref bean="goodsManager" />
+		</property>
+	</bean>
+	
+	<bean id="cartAction" class="com.ym.ssh.action.CartAction">
+		<property name="cartManager">
+			<ref bean="cartManager" />
+		</property>
+		<property name="goodsManager">
+			<ref bean="goodsManager" />
+		</property>
+	</bean>
+	
+	<bean id="orderAction" class="com.ym.ssh.action.OrderAction">
+		<property name="goodsManager">
+			<ref bean="goodsManager" />
+		</property>
+		<property name="orderManager">
+			<ref bean="orderManager" />
+		</property>
+		<property name="cartManager">
+			<ref bean="cartManager" />
+		</property>
+		<property name="orderDetailsManager">
+			<ref bean="orderDetailsManager" />
+		</property>
+	</bean>
+</beans>

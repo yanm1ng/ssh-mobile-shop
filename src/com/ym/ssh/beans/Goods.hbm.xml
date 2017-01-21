@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ym.ssh.beans">
+    <class name="Goods" table="goods">
+        <id name="goodsId" type="int" column="goodsId">
+            <generator class="native"></generator>
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="brand" type="java.lang.String">
+            <column name="brand" />
+        </property>
+        <property name="price" type="double">
+            <column name="price" />
+        </property>
+        <property name="sale" type="int">
+            <column name="sale" />
+        </property>
+        <property name="stock" type="int">
+            <column name="stock" />
+        </property>
+        <property name="image" type="java.lang.String">
+            <column name="image" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" />
+        </property>
+    </class>
+</hibernate-mapping>

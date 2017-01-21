@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-14 20:08:43 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping package="com.ym.ssh.beans">
+    <class name="Message" table="message">
+    	<id name="messageId" type="int" column="messageId">
+            <generator class="native"></generator>
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="name" />
+        </property>
+        <property name="message" type="java.lang.String">
+            <column name="message" />
+        </property>
+        <property name="time" type="java.lang.String">
+            <column name="time" />
+        </property>
+    </class>
+</hibernate-mapping>

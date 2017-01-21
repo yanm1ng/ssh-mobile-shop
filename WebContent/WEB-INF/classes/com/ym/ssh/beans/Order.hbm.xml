@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ym.ssh.beans">
+    <class name="Order" table="orders">
+        <id name="orderId" type="int" column="orderId">
+            <generator class="native"></generator>
+        </id>
+        <property name="userId" type="int">
+            <column name="userId" />
+        </property>
+        <property name="orderTime" type="java.lang.String">
+            <column name="orderTime" />
+        </property>
+         <property name="allSum" type="double">
+            <column name="allSum" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="status" />
+        </property>
+    </class>
+</hibernate-mapping>

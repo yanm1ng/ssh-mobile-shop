@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ym.ssh.beans">
+    <class name="OrderDetails" table="orderDetails">
+        <id name="orderDetailsId" type="int">
+            <column name="orderDetailsId" />
+            <generator class="native" />
+        </id>
+        <property name="orderId" type="int">
+            <column name="orderId" />
+        </property>
+        <property name="goodsId" type="int">
+            <column name="goodsId" />
+        </property>
+        <property name="goodsNum" type="int">
+            <column name="goodsNum" />
+        </property>
+    </class>
+</hibernate-mapping>
